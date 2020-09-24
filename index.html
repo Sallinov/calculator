@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="style.css">
 	<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="light-theme">
 	<div class="theme-style">
 		<h2>Change theme</h2>
 		<div class="theme-changer">
@@ -59,11 +59,20 @@
 		</div>
 	</div>
 	<script>
-
-		selectElement.addEventListener('change', (event) => {
-			const result = document.querySelector('.checkbox');
-			result.textContent = `You like ${event.target.value}`;
-		});
+		let checkbox = document.querySelector('#checkbox');
+		let body = document.body;
+		body.className = getCookie('theme');
+		checkbox.checked = getCookie('theme') === 'dark-theme';
+		checkbox.onchange = function() {
+			body.className = checkbox.checked === true ?  'dark-theme' : 'light-theme';
+			document.cookie = "theme=" + body.className;
+		};
+		function getCookie(name) {
+			let matches = document.cookie.match(new RegExp(
+					"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+			));
+			return matches ? decodeURIComponent(matches[1]) : undefined;
+		}
 	</script>
 </body>
 </html>
