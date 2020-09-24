@@ -120,7 +120,7 @@ button.btn-orange,
 .dark-theme {
 	background-color: #2d292e;
 }
-.dark-theme > .them-style > h2,
+.dark-theme .theme-style > h2,
 .dark-theme .btns-block .btn-gray {
 	color: #FFFFFF;
 }
