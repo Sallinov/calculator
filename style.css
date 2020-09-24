@@ -61,10 +61,13 @@ body {
 .iphone-checkbox:checked + label:after {
 	left: 26px;
 }
+.result,
+.theme-style {
+	justify-content: space-around;
+    flex-direction: column;
+}
 .theme-style {
 	height: 100px;
-    justify-content: space-around;
-    flex-direction: column;
     position: absolute;
     transform: translateX(-50%);
     left: 50%;
@@ -75,10 +78,15 @@ body {
 	font-weight: 300;
 	white-space: nowrap;
 }
+.btns-block > div {
+    display: flex;
+	justify-content: space-between;
+}
 .theme-changer {
 	justify-content: center;
 }
 body,
+.result,
 .theme-style,
 .theme-changer {
     display: flex;
@@ -109,9 +117,18 @@ button.btn-orange,
     color: #333333;
 }
 .result {
-	flex: 1 1 100%;
     margin: 75px 5px 10px;
+	padding: 0 20px;
+	flex: 1 1 100%;
     background-color: #FFFFFF;
+}
+#buff {
+	font-size: 1.75rem;
+	font-weight: 300;
+}
+#enter {
+	font-size: 2.25rem;
+	font-weight: 500;
 }
 .result,
 .btns-block button {
@@ -126,6 +143,7 @@ button.btn-orange,
 .dark-theme {
 	background-color: #2d292e;
 }
+.dark-theme .result,
 .dark-theme > .theme-style > h2,
 .dark-theme .btns-block .btn-gray {
 	color: #FFFFFF;

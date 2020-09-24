@@ -6,6 +6,7 @@
 	<meta name="description" content="JS Calculator">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="assets/icon.png" type="image/png">
 	<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="light-theme">
@@ -22,51 +23,93 @@
 	</div>
 	<div class="calculator">
 		<div class="result">
-			<div></div>
-			<div></div>
+			<div id="buff"></div>
+			<div id="enter"></div>
 		</div>
 		<div class="btns-block">
 			<div>
-				<button class="btn-gray">C</button>
-				<button class="btn-gray">⌫</button>
-				<button class="btn-gray">xª</button>
-				<button class="btn-orange">÷</button>
+				<button date-delete class="btn-gray">C</button>
+				<button date-backspace class="btn-gray">⌫</button>
+				<button date-operation class="btn-gray">^</button>
+				<button date-operation class="btn-orange">÷</button>
 			</div>
 			<div>
-				<button>1</button>
-				<button>2</button>
-				<button>3</button>
-				<button class="btn-orange">×</button>
+				<button data-numder>1</button>
+				<button data-numder>2</button>
+				<button data-numder>3</button>
+				<button date-operation class="btn-orange">×</button>
 			</div>
 			<div>
-				<button>4</button>
-				<button>5</button>
-				<button>6</button>
-				<button class="btn-orange">-</button>
+				<button data-numder>4</button>
+				<button data-numder>5</button>
+				<button data-numder>6</button>
+				<button date-operation class="btn-orange">-</button>
 			</div>
 			<div>
-				<button>7</button>
-				<button>8</button>
-				<button>9</button>
-				<button class="btn-orange">+</button>
+				<button data-numder>7</button>
+				<button data-numder>8</button>
+				<button data-numder>9</button>
+				<button date-operation class="btn-orange">+</button>
 			</div>
 			<div>
-				<button>√</button>
-				<button>0</button>
-				<button>,</button>
-				<button class="btn-orange">=</button>
+				<button date-operation>√</button>
+				<button data-numder>0</button>
+				<button data-delimiter>.</button>
+				<button date-equally class="btn-orange">=</button>
 			</div>
 		</div>
 	</div>
 	<script>
-		let checkbox = document.querySelector('#checkbox');
+		let statusOperation = false;
 		let body = document.body;
+		let buff = document.querySelector('#buff');
+		let enter = document.querySelector('#enter');
+		let checkbox = document.querySelector('#checkbox');
+		let button = document.getElementsByTagName('button');
+
 		body.className = getCookie('theme');
 		checkbox.checked = getCookie('theme') === 'dark-theme';
+
+		for (var number = 0; number < button.length; number++) {
+			button[number].onclick = func;
+		}
+
 		checkbox.onchange = function() {
 			body.className = checkbox.checked === true ?  'dark-theme' : 'light-theme';
 			document.cookie = "theme=" + body.className;
 		};
+
+		function func() {
+			/*switch(this.attributes[0].name) {
+				case 'data-numder':
+					if (statusOperation) {
+						buff.innerHTML += enter.innerHTML;
+						enter.innerHTML = this.innerHTML;
+					} else {
+						enter.innerHTML += this.innerHTML;
+						statusOperation = false;
+					}
+					break;
+				case 'date-delete':
+					enter.innerHTML = '';
+					buff.innerHTML = '';
+					break;
+				case 'date-backspace':
+					enter.innerHTML = enter.innerHTML.substr(0,enter.innerHTML.length-1);
+					break;
+				case 'data-delimiter':
+					enter.innerHTML += enter.innerHTML.length < 1 ? '0' + this.innerHTML : this.innerHTML;
+					break;
+				case 'date-operation':
+					buff.innerHTML = buff.innerHTML.length < 1 && !statusOperation  ? enter.innerHTML : buff.innerHTML;
+					enter.innerHTML = !isNaN(buff.innerHTML) ? this.innerHTML : enter.innerHTML;
+					statusOperation = true;
+					break;
+			}*/
+			if(this.attributes[0].name === 'data-numder')
+				enter.innerHTML += this.innerHTML;
+		}
+
 		function getCookie(name) {
 			let matches = document.cookie.match(new RegExp(
 					"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
